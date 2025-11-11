@@ -33,8 +33,8 @@ def main():
         pygame.Surface.fill(screen, color = "black")
 
         updatable.update(dt)
-        for a in asteroids:
-            if a.collides_with(player):
+        for a in (ast for ast in asteroids if len(ast.current_polygon) > 0):
+            if player.collides_with(a):
                 log_event("player_hit")
                 print("Game over!")
                 print(f"Final score: {player.score}")

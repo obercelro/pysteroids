@@ -1,4 +1,5 @@
 import pygame
+import matplotlib.path as mpltPath
 from circleshape import CircleShape
 from shot import Shot
 from constants import *
@@ -52,6 +53,11 @@ class Player(CircleShape):
 
     def increase_score(self):
         self.score += 1
+
+    def collides_with(self, asteroid):
+        print(f"Triangle points: {self.triangle()}\nPolygon: {asteroid.current_polygon}")
+        danger_zone = mpltPath.Path(asteroid.current_polygon)
+        return danger_zone.contains_points(self.triangle()).any()
 
     def update(self, dt):
         self.shot_cd -= dt
