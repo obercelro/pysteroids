@@ -37,12 +37,14 @@ def main():
             if a.collides_with(player):
                 log_event("player_hit")
                 print("Game over!")
+                print(f"Final score: {player.score}")
                 sys.exit()
             for s in shots:
                 if s.collides_with(a):
                     log_event("asteroid_shot")
                     a.split()
                     s.kill()
+                    player.increase_score()
         for item in drawable:
             item.draw(screen)
         
